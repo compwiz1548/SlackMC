@@ -1,0 +1,16 @@
+[
+{
+  "modid": "SlackMC",
+  "name": "SlackMC",
+  "description": "Allows for Slack and MC to exchange messages.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Compwiz1548"],
+  "credits": "Pahimar for his EE3 code and modding tutorials.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
