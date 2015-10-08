@@ -17,3 +17,4 @@ Slack.iws
 Slack.iml
 out/*
 .gradle/*
+.gradle/gradle.log
