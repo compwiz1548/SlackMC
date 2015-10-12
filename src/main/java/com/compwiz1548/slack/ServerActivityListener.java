@@ -34,16 +34,12 @@ public class ServerActivityListener {
 
     @SubscribeEvent
     public void playerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
-        String message = event.player.getGameProfile().getName() + " joined the game.";
-        Slack.instance.sendToSlack(SlackCommandSender.getInstance(), message);
-        //FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(new ChatComponentText(EnumChatFormatting.YELLOW + message));
+        Slack.instance.sendToSlack(SlackCommandSender.getInstance(), event.player.getGameProfile().getName() + " joined the game.");
     }
 
     @SubscribeEvent
     public void playerLoggedOutEvent(PlayerEvent.PlayerLoggedOutEvent event) {
-        String message = event.player.getGameProfile().getName() + " left the game.";
-        Slack.instance.sendToSlack(SlackCommandSender.getInstance(), message);
-        //FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(new ChatComponentText(EnumChatFormatting.YELLOW + message));
+        Slack.instance.sendToSlack(SlackCommandSender.getInstance(), event.player.getGameProfile().getName() + " left the game.");
     }
 
     @SubscribeEvent

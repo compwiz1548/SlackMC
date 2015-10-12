@@ -1,6 +1,7 @@
 package com.compwiz1548.slack;
 
 import com.compwiz1548.slack.handler.ConfigurationHandler;
+import com.compwiz1548.slack.reference.Reference;
 import com.compwiz1548.slack.reference.Settings;
 import com.compwiz1548.slack.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -21,9 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
-@Mod(modid = "SlackMC", name = "SlackMC", version = "1.0")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class Slack {
-    @Instance("SlackMC")
+    @Instance(Reference.MOD_ID)
     public static Slack instance;
     private SlackSender slackReceiver;
     private SlackReceiver slackSender;
@@ -59,7 +60,7 @@ public class Slack {
 
     @EventHandler
     public void fmlLifeCycle(FMLServerStartedEvent event) {
-        Slack.instance.sendToSlack(SlackCommandSender.getInstance(), "Server started.");
+        Slack.instance.sendToSlack(SlackCommandSender.getInstance(), "Server started with SlackMC v" + Reference.VERSION);
     }
 
     @EventHandler
@@ -73,7 +74,7 @@ public class Slack {
             json.put("text", text);
             json.put("username", sender.getCommandSenderName());
             if (!(sender instanceof SlackCommandSender)) {
-                json.put("icon_url", "https://minotar.net/avatar/" + sender.getCommandSenderName() + ".png");
+                json.put("icon_url", "https://minotar.net/helm/" + sender.getCommandSenderName() + ".png");
             }
             instance.slackReceiver.send(json.toString());
         } catch (Exception e) {
