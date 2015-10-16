@@ -75,7 +75,7 @@ public class Slack {
             } catch (NullPointerException e) {
                 //Do nothing (no previous receiver)
             }
-            this.slackReceiver = new SlackReceiver(Settings.port, Settings.token, Settings.slackServerFormat);
+            this.slackReceiver = new SlackReceiver();
             this.slackReceiver.setEnabled(true);
             receiverConnected = true;
         } catch (IOException e) {

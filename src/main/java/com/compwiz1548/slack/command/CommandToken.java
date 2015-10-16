@@ -14,7 +14,7 @@ import net.minecraft.util.StatCollector;
 public class CommandToken extends CommandBase {
     @Override
     public String getCommandName() {
-        return Names.Commands.TOKEN;
+        return Names.Settings.TOKEN;
     }
 
     @Override

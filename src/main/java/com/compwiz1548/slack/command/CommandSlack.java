@@ -17,6 +17,7 @@ public class CommandSlack extends CommandBase {
         modCommands.add(new CommandWebHook());
         modCommands.add(new CommandToken());
         modCommands.add(new CommandPort());
+        modCommands.add(new CommandFormat());
 
         for (CommandBase commandBase : modCommands) {
             commands.add(commandBase.getCommandName());

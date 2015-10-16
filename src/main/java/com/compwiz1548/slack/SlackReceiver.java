@@ -1,5 +1,6 @@
 package com.compwiz1548.slack;
 
+import com.compwiz1548.slack.reference.Settings;
 import com.google.common.io.ByteStreams;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -21,10 +22,10 @@ public class SlackReceiver implements HttpHandler {
     private final String format;
     private HttpServer server;
 
-    public SlackReceiver(int port, String token, String format) throws IOException {
-        this.token = token;
-        this.format = format;
-        InetSocketAddress address = new InetSocketAddress(port);
+    public SlackReceiver() throws IOException {
+        this.token = Settings.token;
+        this.format = Settings.format;
+        InetSocketAddress address = new InetSocketAddress(Settings.port);
         this.server = HttpServer.create(address, 0);
         this.server.createContext("/", this);
         this.server.setExecutor(Executors.newCachedThreadPool());

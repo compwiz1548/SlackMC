@@ -15,7 +15,7 @@ public class CommandWebHook extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return Names.Commands.URL;
+        return Names.Settings.URL;
     }
 
     @Override

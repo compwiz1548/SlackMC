@@ -1,4 +1,6 @@
-#General
+########################################
+#               General                #
+########################################
 general.no_url=No URL specified! Go to the config and specify one, then run '/slackmc reload'
 general.client_side=SlackMC is a server-side only mod. Installing it in your client will have no effect.
 general.incorrect_webhook=Incorrect webhook URL.
@@ -8,7 +10,24 @@ general.server_connected=Server connected with SlackMC v%s
 general.server_disconnected=Server disconnected.
 general.server_stopped=Server stopped.
 
-#Commands
+########################################
+#                Config                #
+########################################
+config.url.key=webhook-url
+config.url.comment=URL from Slack Incoming Webhook.
+
+config.port.key=port
+config.port.comment=Port to listen for messages coming from Slack.
+
+config.token.key=token
+config.token.comment=Token from Slack Outgoing Webhook.
+
+config.format.key=server-format
+config.format.comment=Format messages from Slack will appear as on your server.
+
+########################################
+#               Commands               #
+########################################
 commands.slackmc.usage=/slackmc
 
 commands.slackmc.reload.usage=/slackmc reload
@@ -25,3 +44,8 @@ commands.slackmc.token.reset=Token reset.
 commands.slackmc.port.usage=/slackmc port <port>
 commands.slackmc.port.success=Port set to %s
 commands.slackmc.port.reset=Port reset.
+
+commands.slackmc.format.usage=/slackmc format <format>
+commands.slackmc.format.current=Current Format: %s
+commands.slackmc.format.success=Format set to %s
+commands.slackmc.format.reset=Format reset.
