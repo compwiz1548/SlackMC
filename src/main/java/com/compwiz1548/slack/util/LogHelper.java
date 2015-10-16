@@ -1,11 +1,12 @@
 package com.compwiz1548.slack.util;
 
+import com.compwiz1548.slack.reference.Reference;
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
 public class LogHelper {
     public static void log(Level logLevel, Object object) {
-        FMLLog.log("SlackMC", logLevel, String.valueOf(object));
+        FMLLog.log(Reference.MOD_NAME, logLevel, String.valueOf(object));
     }
 
     public static void all(Object object) {

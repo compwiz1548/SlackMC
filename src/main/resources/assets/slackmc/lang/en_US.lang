@@ -1,0 +1,27 @@
+#General
+general.no_url=No URL specified! Go to the config and specify one, then run '/slackmc reload'
+general.client_side=SlackMC is a server-side only mod. Installing it in your client will have no effect.
+general.incorrect_webhook=Incorrect webhook URL.
+general.current_webhook=Current Webhook URL: %s
+
+general.server_connected=Server connected with SlackMC v%s
+general.server_disconnected=Server disconnected.
+general.server_stopped=Server stopped.
+
+#Commands
+commands.slackmc.usage=/slackmc
+
+commands.slackmc.reload.usage=/slackmc reload
+commands.slackmc.reload.success=Reload successful.
+
+commands.slackmc.url.usage=/slackmc url <webhook url>
+commands.slackmc.url.success=Webhook URL set to %s
+commands.slackmc.url.reset=Webhook URL reset.
+
+commands.slackmc.token.usage=/slackmc token <token>
+commands.slackmc.token.success=Token set to %s
+commands.slackmc.token.reset=Token reset.
+
+commands.slackmc.port.usage=/slackmc port <port>
+commands.slackmc.port.success=Port set to %s
+commands.slackmc.port.reset=Port reset.

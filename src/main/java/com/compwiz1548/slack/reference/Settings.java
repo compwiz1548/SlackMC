@@ -5,6 +5,4 @@ public class Settings {
     public static int port;
     public static String token;
     public static String slackServerFormat;
-    public static String channel;
-    public static String ip;
 }
