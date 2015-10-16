@@ -8,13 +8,8 @@ import com.compwiz1548.slack.util.LogHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
-
-import java.util.Arrays;
 
 public class CommandFormat extends CommandBase {
     @Override
@@ -46,7 +41,7 @@ public class CommandFormat extends CommandBase {
             }
         } else {
             String format = "";
-            for(int i = 1; i < args.length; i++) {
+            for (int i = 1; i < args.length; i++) {
                 format = format + " " + args[i];
             }
             boolean success = ConfigurationHandler.setFormat(format.trim());

@@ -10,6 +10,6 @@ public class Names {
         public static final String URL = "url";
         public static final String TOKEN = "token";
         public static final String PORT = "port";
-        public static final String FORMAT= "format";
+        public static final String FORMAT = "format";
     }
 }
