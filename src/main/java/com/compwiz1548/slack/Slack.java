@@ -6,6 +6,7 @@ import com.compwiz1548.slack.reference.Messages;
 import com.compwiz1548.slack.reference.Reference;
 import com.compwiz1548.slack.reference.Settings;
 import com.compwiz1548.slack.util.LogHelper;
+import com.compwiz1548.slack.util.Pair;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -16,7 +17,6 @@ import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkCheckHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import javafx.util.Pair;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 

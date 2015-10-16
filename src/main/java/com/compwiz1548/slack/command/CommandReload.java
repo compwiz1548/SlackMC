@@ -5,7 +5,7 @@ import com.compwiz1548.slack.handler.ConfigurationHandler;
 import com.compwiz1548.slack.reference.Messages;
 import com.compwiz1548.slack.reference.Names;
 import com.compwiz1548.slack.util.LogHelper;
-import javafx.util.Pair;
+import com.compwiz1548.slack.util.Pair;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -11,6 +11,11 @@ public final class Messages {
         public static final String NO_URL = GENERAL_PREFIX + "no_url";
         public static final String CLIENT_SIDE = GENERAL_PREFIX + "clientside";
         public static final String INCORRECT_WEBHOOK = GENERAL_PREFIX + "incorrect_webhook";
+
+        public static final String CURRENTLY_ONLINE = GENERAL_PREFIX + "online";
+        public static final String NO_ONE_ONLINE = GENERAL_PREFIX + "no_one_online";
+
+        public static final String UNKNOWN_COMMAND = GENERAL_PREFIX + "unknown";
     }
 
     public static final class Config {

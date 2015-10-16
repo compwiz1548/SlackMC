@@ -10,6 +10,11 @@ general.server_connected=Server connected with SlackMC v%s
 general.server_disconnected=Server disconnected.
 general.server_stopped=Server stopped.
 
+general.online=Currently Online: %s
+general.no_one_online=No players currently online.
+
+general.unknown=Unknown command. Current commands: %s
+
 ########################################
 #                Config                #
 ########################################
@@ -28,7 +33,7 @@ config.format.comment=Format messages from Slack will appear as on your server.
 ########################################
 #               Commands               #
 ########################################
-commands.slackmc.usage=/slackmc
+commands.slackmc.usage=/slackmc <subcommand>
 
 commands.slackmc.reload.usage=/slackmc reload
 commands.slackmc.reload.success=Reload successful.

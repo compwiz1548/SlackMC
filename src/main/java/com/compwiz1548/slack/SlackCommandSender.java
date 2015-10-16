@@ -1,14 +1,17 @@
 package com.compwiz1548.slack;
 
 import net.minecraft.command.ICommandSender;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public class SlackCommandSender implements ICommandSender {
-    private static final ICommandSender INSTANCE = new SlackCommandSender();
+    private static final ICommandSender INSTANCE = new SlackCommandSender(false);
+    private boolean broadcastResult;
 
-    private SlackCommandSender() {
+    public SlackCommandSender(boolean broadcastResult) {
+        this.broadcastResult = broadcastResult;
     }
 
     public static ICommandSender getInstance() {
@@ -22,12 +25,14 @@ public class SlackCommandSender implements ICommandSender {
 
     @Override
     public IChatComponent func_145748_c_() {
-        return null;
+        return new ChatComponentText(this.getCommandSenderName());
     }
 
     @Override
     public void addChatMessage(IChatComponent p_145747_1_) {
-
+        if(broadcastResult) {
+            Slack.instance.getSlackSender().sendToSlack(this, p_145747_1_.getUnformattedText());
+        }
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.compwiz1548.slack.handler;
 
 import com.compwiz1548.slack.reference.Messages;
 import com.compwiz1548.slack.reference.Settings;
-import javafx.util.Pair;
+import com.compwiz1548.slack.util.Pair;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
 

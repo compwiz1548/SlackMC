@@ -14,7 +14,7 @@ import net.minecraft.util.StatCollector;
 public class CommandPort extends CommandBase {
     @Override
     public String getCommandName() {
-        return Names.Commands.PORT;
+        return Names.Settings.PORT;
     }
 
     @Override

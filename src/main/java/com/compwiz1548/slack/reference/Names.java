@@ -12,4 +12,8 @@ public class Names {
         public static final String PORT = "port";
         public static final String FORMAT = "format";
     }
+
+    public static final class Bot {
+        public static final String WHO = "who";
+    }
 }

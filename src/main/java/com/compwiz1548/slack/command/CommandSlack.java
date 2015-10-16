@@ -2,8 +2,11 @@ package com.compwiz1548.slack.command;
 
 import com.compwiz1548.slack.reference.Messages;
 import com.compwiz1548.slack.reference.Names;
+import com.compwiz1548.slack.util.LogHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,12 @@ public class CommandSlack extends CommandBase {
                     command.processCommand(commandSender, args);
                 }
             }
+        }
+        else {
+            if (commandSender instanceof EntityPlayerMP) {
+                commandSender.addChatMessage(new ChatComponentText(Messages.Commands.BASE_COMMAND_USAGE));
+            }
+            LogHelper.info(Messages.Commands.BASE_COMMAND_USAGE);
         }
     }
 

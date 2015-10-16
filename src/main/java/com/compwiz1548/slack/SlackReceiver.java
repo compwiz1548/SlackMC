@@ -1,19 +1,25 @@
 package com.compwiz1548.slack;
 
+import com.compwiz1548.slack.reference.Messages;
 import com.compwiz1548.slack.reference.Settings;
+import com.compwiz1548.slack.util.LogHelper;
+import com.compwiz1548.slack.util.Utils;
 import com.google.common.io.ByteStreams;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
@@ -21,6 +27,7 @@ public class SlackReceiver implements HttpHandler {
     private final String token;
     private final String format;
     private HttpServer server;
+    private MinecraftServer mcServer;
 
     public SlackReceiver() throws IOException {
         this.token = Settings.token;
@@ -29,6 +36,7 @@ public class SlackReceiver implements HttpHandler {
         this.server = HttpServer.create(address, 0);
         this.server.createContext("/", this);
         this.server.setExecutor(Executors.newCachedThreadPool());
+        this.mcServer = FMLCommonHandler.instance().getMinecraftServerInstance();
     }
 
     public void setEnabled(boolean enabled) {
@@ -66,10 +74,29 @@ public class SlackReceiver implements HttpHandler {
             return;
         }
         String text = map.get("text");
-        if (text == null || text.startsWith("/")) {
+        if (text == null) {
             return;
         }
+
         text = URLDecoder.decode(text, "UTF-8");
+
+        if (text.startsWith("/")) {
+            return;
+        } else if (text.startsWith("!")) {
+            text = text.substring(1); //Get rid of the !
+            if (text.equals("who") || text.equals("players")) {
+                String playerList = Utils.getPlayerList(mcServer);
+                if (playerList.equals("")) {
+                    Slack.instance.getSlackSender().sendToSlack(SlackCommandSender.getInstance(), StatCollector.translateToLocal(Messages.General.NO_ONE_ONLINE));
+                } else {
+                    Slack.instance.getSlackSender().sendToSlack(SlackCommandSender.getInstance(), String.format(StatCollector.translateToLocal(Messages.General.CURRENTLY_ONLINE), playerList));
+                }
+                return;
+            } else {
+                mcServer.getCommandManager().executeCommand(new SlackCommandSender(true), text);
+                return;
+            }
+        }
         ChatComponentText message = new ChatComponentText(EnumChatFormatting.BOLD + "" + EnumChatFormatting.AQUA + "[Slack] " + EnumChatFormatting.RESET + String.format(format, username, text));
         FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(message);
     }
