@@ -12,6 +12,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkCheckHandler;
@@ -45,7 +46,6 @@ public class Slack {
             ServerActivityListener listener = new ServerActivityListener();
             FMLCommonHandler.instance().bus().register(listener);
             MinecraftForge.EVENT_BUS.register(listener);
-            slackConnect();
         } else {
             LogHelper.warn(StatCollector.translateToLocal(Messages.General.CLIENT_SIDE));
         }
@@ -88,6 +88,12 @@ public class Slack {
     @SideOnly(Side.SERVER)
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandSlack());
+    }
+
+    @EventHandler
+    @SideOnly(Side.SERVER)
+    public void onServerStarted(FMLServerStartedEvent event) {
+        slackConnect();
     }
 
     @EventHandler
