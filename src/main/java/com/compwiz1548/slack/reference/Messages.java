@@ -1,5 +1,7 @@
 package com.compwiz1548.slack.reference;
 
+import javax.lang.model.element.Name;
+
 public final class Messages {
     public static final class General {
         private static final String GENERAL_PREFIX = "general.";
@@ -15,7 +17,7 @@ public final class Messages {
         public static final String CURRENTLY_ONLINE = GENERAL_PREFIX + "online";
         public static final String NO_ONE_ONLINE = GENERAL_PREFIX + "no_one_online";
 
-        public static final String UNKNOWN_COMMAND = GENERAL_PREFIX + "unknown";
+        public static final String PERMISSION_DENIED = GENERAL_PREFIX + "permission_denied";
     }
 
     public static final class Config {
@@ -32,6 +34,9 @@ public final class Messages {
 
         public static final String FORMAT_KEY = CONFIG_PREFIX + Names.Settings.FORMAT + ".key";
         public static final String FORMAT_COMMENT = CONFIG_PREFIX + Names.Settings.FORMAT + ".comment";
+
+        public static final String OPS_KEY = CONFIG_PREFIX + Names.Settings.OP + ".key";
+        public static final String OPS_COMMENT = CONFIG_PREFIX + Names.Settings.OP + ".comment";
     }
 
     public static final class Commands {
@@ -58,5 +63,9 @@ public final class Messages {
         public static final String FORMAT_COMMAND_CURRENT = COMMAND_PREFIX + Names.Settings.FORMAT + ".current";
         public static final String FORMAT_COMMAND_SUCCESS = COMMAND_PREFIX + Names.Settings.FORMAT + ".success";
         public static final String FORMAT_COMMAND_RESET = COMMAND_PREFIX + Names.Settings.FORMAT + ".reset";
+
+        public static final String OP_COMMAND_USAGE = COMMAND_PREFIX + Names.Settings.OP + ".usage";
+        public static final String OP_COMMAND_ADD_SUCCESS = COMMAND_PREFIX + Names.Settings.OP + ".add.success";
+        public static final String OP_COMMAND_REMOVE_SUCCESS = COMMAND_PREFIX + Names.Settings.OP + ".remove.success";
     }
 }

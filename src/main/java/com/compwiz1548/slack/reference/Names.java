@@ -11,6 +11,7 @@ public class Names {
         public static final String TOKEN = "token";
         public static final String PORT = "port";
         public static final String FORMAT = "format";
+        public static final String OP = "op";
     }
 
     public static final class Bot {

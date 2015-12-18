@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'maven'
 
-version = "0.4"
+version = "0.5"
 group= "com.compwiz1548.slack" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SlackMC"
 
@@ -46,7 +46,6 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     shade 'com.google.api-client:google-api-client:1.20.0'
-    shade 'org.json:json:20150729'
 }
 
 processResources

@@ -13,7 +13,7 @@ general.server_stopped=Server stopped.
 general.online=Currently Online: %s
 general.no_one_online=No players currently online.
 
-general.unknown=Unknown command. Current commands: %s
+general.permission_denied=You do not have permission to run this command.
 
 ########################################
 #                Config                #
@@ -29,6 +29,9 @@ config.token.comment=Token from Slack Outgoing Webhook.
 
 config.format.key=server-format
 config.format.comment=Format messages from Slack will appear as on your server.
+
+config.op.key=operators
+config.op.comment=List of Slack usernames of people that are allowed to run commands from Slack. You may remove the example entries.
 
 ########################################
 #               Commands               #
@@ -54,3 +57,8 @@ commands.slackmc.format.usage=/slackmc format <format>
 commands.slackmc.format.current=Current Format: %s
 commands.slackmc.format.success=Format set to %s
 commands.slackmc.format.reset=Format reset.
+
+commands.slackmc.op.usage=/slackmc op add/remove <username>
+commands.slackmc.op.add.success=%s successfully added to SlackMC ops list.
+commands.slackmc.op.remove.success=%s successfully removed from SlackMC ops list.
+commands.slackmc.op.reset=Ops reset.

@@ -1,13 +1,16 @@
 package com.compwiz1548.slack;
 
+import com.compwiz1548.slack.util.LogHelper;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.util.Maps;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import net.minecraft.command.ICommandSender;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,13 +34,14 @@ public class SlackSender {
 
     public void sendToSlack(ICommandSender sender, String text) {
         try {
-            JSONObject json = new JSONObject();
-            json.put("text", text);
-            json.put("username", sender.getCommandSenderName());
+            JsonObject json = new JsonObject();
+            json.addProperty("text", text);
+            json.addProperty("username", sender.getCommandSenderName());
             if (!(sender instanceof SlackCommandSender)) {
-                json.put("icon_url", "https://minotar.net/helm/" + sender.getCommandSenderName() + ".png");
+                json.addProperty("icon_url", "https://minotar.net/helm/" + sender.getCommandSenderName() + ".png");
             }
             send(json.toString());
+            //LogHelper.info(json.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

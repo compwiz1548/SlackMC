@@ -3,7 +3,7 @@
   "modid": "SlackMC",
   "name": "SlackMC",
   "description": "Allows for Slack and MC to exchange messages.",
-  "version": "1.4",
+  "version": "0.5",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",

@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,7 +79,9 @@ public class SlackReceiver implements HttpHandler {
             return;
         }
 
+        LogHelper.info(text);
         text = URLDecoder.decode(text, "UTF-8");
+        text = StringEscapeUtils.unescapeXml(text); //Fix for < and >
 
         if (text.startsWith("/")) {
             return;
@@ -93,12 +96,16 @@ public class SlackReceiver implements HttpHandler {
                 }
                 return;
             } else {
-                mcServer.getCommandManager().executeCommand(new SlackCommandSender(true), text);
+                if (Settings.ops.contains(username)) {
+                    mcServer.getCommandManager().executeCommand(new SlackCommandSender(true), text);
+                    LogHelper.info(String.format("Executed command \"%s\" from Slack", text));
+                }
+                else
+                    Slack.instance.getSlackSender().sendToSlack(SlackCommandSender.getInstance(), StatCollector.translateToLocal(Messages.General.PERMISSION_DENIED));
                 return;
             }
         }
-        ChatComponentText message = new ChatComponentText(EnumChatFormatting.BOLD + "" + EnumChatFormatting.AQUA + "[Slack] " + EnumChatFormatting.RESET + String.format(format, username, text));
-        FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(message);
+        FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(new ChatComponentText(EnumChatFormatting.BOLD + "" + EnumChatFormatting.AQUA + "[Slack] " + EnumChatFormatting.RESET + String.format(format, username, text)));
     }
 
 }
