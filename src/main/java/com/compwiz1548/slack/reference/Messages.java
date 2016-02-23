@@ -1,7 +1,5 @@
 package com.compwiz1548.slack.reference;
 
-import javax.lang.model.element.Name;
-
 public final class Messages {
     public static final class General {
         private static final String GENERAL_PREFIX = "general.";
@@ -37,6 +35,9 @@ public final class Messages {
 
         public static final String OPS_KEY = CONFIG_PREFIX + Names.Settings.OP + ".key";
         public static final String OPS_COMMENT = CONFIG_PREFIX + Names.Settings.OP + ".comment";
+
+        public static final String NAME_KEY = CONFIG_PREFIX + Names.Settings.NAME + ".key";
+        public static final String NAME_COMMENT = CONFIG_PREFIX + Names.Settings.NAME + ".comment";
     }
 
     public static final class Commands {

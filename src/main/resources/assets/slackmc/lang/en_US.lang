@@ -33,6 +33,9 @@ config.format.comment=Format messages from Slack will appear as on your server.
 config.op.key=operators
 config.op.comment=List of Slack usernames of people that are allowed to run commands from Slack. You may remove the example entries.
 
+config.name.key=server-name
+config.name.comment=Enter a name for this server here. This is handy for having multiple servers in the same Slack channel.
+
 ########################################
 #               Commands               #
 ########################################

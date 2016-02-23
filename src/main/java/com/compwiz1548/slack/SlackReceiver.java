@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
@@ -99,8 +98,7 @@ public class SlackReceiver implements HttpHandler {
                 if (Settings.ops.contains(username)) {
                     mcServer.getCommandManager().executeCommand(new SlackCommandSender(true), text);
                     LogHelper.info(String.format("Executed command \"%s\" from Slack", text));
-                }
-                else
+                } else
                     Slack.instance.getSlackSender().sendToSlack(SlackCommandSender.getInstance(), StatCollector.translateToLocal(Messages.General.PERMISSION_DENIED));
                 return;
             }

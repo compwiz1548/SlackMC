@@ -8,4 +8,5 @@ public class Settings {
     public static String token;
     public static String format;
     public static List<String> ops;
+    public static String serverName;
 }

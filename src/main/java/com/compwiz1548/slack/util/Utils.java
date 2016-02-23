@@ -14,6 +14,6 @@ public class Utils {
             s.append(entityPlayer.getGameProfile().getName());
             s.append(", ");
         }
-        return s.length() > 0 ? s.substring(0, s.length() - 2): "";
+        return s.length() > 0 ? s.substring(0, s.length() - 2) : "";
     }
 }

@@ -17,6 +17,7 @@ public class ConfigurationHandler {
     private static Pair<String, String> token;
     private static Pair<String, String> format;
     private static Pair<String, String> ops;
+    private static Pair<String, String> serverName;
 
     public static void init(File configFile) {
         if (configuration == null) {
@@ -31,12 +32,14 @@ public class ConfigurationHandler {
         token = new Pair<String, String>(StatCollector.translateToLocal(Messages.Config.TOKEN_KEY), StatCollector.translateToLocal(Messages.Config.TOKEN_COMMENT));
         format = new Pair<String, String>(StatCollector.translateToLocal(Messages.Config.FORMAT_KEY), StatCollector.translateToLocal(Messages.Config.FORMAT_COMMENT));
         ops = new Pair<String, String>(StatCollector.translateToLocal(Messages.Config.OPS_KEY), StatCollector.translateToLocal(Messages.Config.OPS_COMMENT));
+        serverName = new Pair<String, String>(StatCollector.translateToLocal(Messages.Config.NAME_KEY), StatCollector.translateToLocal(Messages.Config.NAME_COMMENT));
 
         Settings.webhookURL = configuration.getString(webhookURL.getKey(), Configuration.CATEGORY_GENERAL, "", webhookURL.getValue());
         Settings.port = configuration.getInt(port.getKey(), Configuration.CATEGORY_GENERAL, 25127, 1024, 65535, port.getValue());
         Settings.token = configuration.getString(token.getKey(), Configuration.CATEGORY_GENERAL, "", token.getValue());
         Settings.format = configuration.getString(format.getKey(), Configuration.CATEGORY_GENERAL, "<%s> %s", format.getValue());
-        Settings.ops = new LinkedList<String>(Arrays.asList(configuration.getStringList(ops.getKey(), Configuration.CATEGORY_GENERAL, new String[]{"example1","example2"}, ops.getValue())));
+        Settings.ops = new LinkedList<String>(Arrays.asList(configuration.getStringList(ops.getKey(), Configuration.CATEGORY_GENERAL, new String[]{"example1", "example2"}, ops.getValue())));
+        Settings.serverName = configuration.getString(serverName.getKey(), Configuration.CATEGORY_GENERAL, "[Server]", serverName.getValue());
 
         if (configuration.hasChanged()) {
             configuration.save();

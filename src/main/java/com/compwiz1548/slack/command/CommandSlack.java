@@ -46,8 +46,7 @@ public class CommandSlack extends CommandBase {
                     command.processCommand(commandSender, args);
                 }
             }
-        }
-        else {
+        } else {
             if (commandSender instanceof EntityPlayerMP) {
                 commandSender.addChatMessage(new ChatComponentText(Messages.Commands.BASE_COMMAND_USAGE));
             }

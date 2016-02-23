@@ -1,5 +1,6 @@
 package com.compwiz1548.slack;
 
+import com.compwiz1548.slack.reference.Settings;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
@@ -20,7 +21,7 @@ public class SlackCommandSender implements ICommandSender {
 
     @Override
     public String getCommandSenderName() {
-        return "[Server]";
+        return Settings.serverName;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class SlackCommandSender implements ICommandSender {
 
     @Override
     public void addChatMessage(IChatComponent p_145747_1_) {
-        if(broadcastResult) {
+        if (broadcastResult) {
             Slack.instance.getSlackSender().sendToSlack(this, p_145747_1_.getUnformattedText());
         }
     }
