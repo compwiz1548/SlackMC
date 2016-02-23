@@ -10,11 +10,14 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-eclipse/*
+run/*
 SlackMC.iml
-Slack.ipr
-Slack.iws
-Slack.iml
+SlackMC.ipr
+SlackMC.iws
 out/*
 .gradle/*
 .gradle/gradle.log
+.idea/modules/SlackMC_api.iml
+.idea/modules/SlackMC_test.iml
+.idea/modules/SlackMC_main.iml
+build/*

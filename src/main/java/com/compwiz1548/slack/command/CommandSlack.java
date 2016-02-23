@@ -4,8 +4,10 @@ import com.compwiz1548.slack.reference.Messages;
 import com.compwiz1548.slack.reference.Names;
 import com.compwiz1548.slack.util.LogHelper;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
@@ -43,7 +45,11 @@ public class CommandSlack extends CommandBase {
         if (args.length >= 1) {
             for (CommandBase command : modCommands) {
                 if (command.getCommandName().equalsIgnoreCase(args[0]) && command.canCommandSenderUseCommand(commandSender)) {
-                    command.processCommand(commandSender, args);
+                    try {
+                        command.processCommand(commandSender, args);
+                    } catch (CommandException e) {
+
+                    }
                 }
             }
         } else {
@@ -55,13 +61,13 @@ public class CommandSlack extends CommandBase {
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender commandSender, String[] args) {
+    public List addTabCompletionOptions(ICommandSender commandSender, String[] args, BlockPos pos) {
         if (args.length == 1) {
-            return getListOfStringsFromIterableMatchingLastWord(args, commands);
+            return getListOfStringsMatchingLastWord(args, commands);
         } else if (args.length >= 2) {
             for (CommandBase command : modCommands) {
                 if (command.getCommandName().equalsIgnoreCase(args[0])) {
-                    return command.addTabCompletionOptions(commandSender, args);
+                    return command.addTabCompletionOptions(commandSender, args, new BlockPos(0, 0, 0));
                 }
             }
         }

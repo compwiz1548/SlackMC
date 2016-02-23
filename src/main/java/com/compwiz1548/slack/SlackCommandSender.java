@@ -1,10 +1,14 @@
 package com.compwiz1548.slack;
 
 import com.compwiz1548.slack.reference.Settings;
+import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.Entity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class SlackCommandSender implements ICommandSender {
@@ -20,13 +24,13 @@ public class SlackCommandSender implements ICommandSender {
     }
 
     @Override
-    public String getCommandSenderName() {
+    public String getName() {
         return Settings.serverName;
     }
 
     @Override
-    public IChatComponent func_145748_c_() {
-        return new ChatComponentText(this.getCommandSenderName());
+    public IChatComponent getDisplayName() {
+        return new ChatComponentText(this.getName());
     }
 
     @Override
@@ -42,13 +46,33 @@ public class SlackCommandSender implements ICommandSender {
     }
 
     @Override
-    public ChunkCoordinates getPlayerCoordinates() {
-        return null;
+    public BlockPos getPosition() {
+        return new BlockPos(0, 0, 0);
+    }
+
+    @Override
+    public Vec3 getPositionVector() {
+        return new Vec3(0.0D, 0.0D, 0.0D);
     }
 
     @Override
     public World getEntityWorld() {
+        return MinecraftServer.getServer().worldServers[0];
+    }
+
+    @Override
+    public Entity getCommandSenderEntity() {
         return null;
+    }
+
+    @Override
+    public boolean sendCommandFeedback() {
+        return false;
+    }
+
+    @Override
+    public void setCommandStat(CommandResultStats.Type type, int amount) {
+
     }
 }
 

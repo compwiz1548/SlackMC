@@ -1,16 +1,16 @@
 package com.compwiz1548.slack.util;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
 import java.util.List;
 
 public class Utils {
     public static String getPlayerList(MinecraftServer server) {
-        List<EntityPlayer> playerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        List<EntityPlayerMP> playerList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 
         StringBuilder s = new StringBuilder();
-        for (EntityPlayer entityPlayer : playerList) {
+        for (EntityPlayerMP entityPlayer : playerList) {
             s.append(entityPlayer.getGameProfile().getName());
             s.append(", ");
         }

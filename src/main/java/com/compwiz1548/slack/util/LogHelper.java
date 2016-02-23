@@ -1,7 +1,7 @@
 package com.compwiz1548.slack.util;
 
 import com.compwiz1548.slack.reference.Reference;
-import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
 public class LogHelper {

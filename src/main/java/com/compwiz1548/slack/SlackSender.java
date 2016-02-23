@@ -33,9 +33,9 @@ public class SlackSender {
         try {
             JsonObject json = new JsonObject();
             json.addProperty("text", text);
-            json.addProperty("username", sender.getCommandSenderName());
+            json.addProperty("username", sender.getName());
             if (!(sender instanceof SlackCommandSender)) {
-                json.addProperty("icon_url", "https://minotar.net/helm/" + sender.getCommandSenderName() + ".png");
+                json.addProperty("icon_url", "https://minotar.net/helm/" + sender.getName() + ".png");
             }
             send(json.toString());
             //LogHelper.info(json.toString());
