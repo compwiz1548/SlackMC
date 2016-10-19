@@ -13,33 +13,41 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class SlackSender {
+public class SlackSender
+{
     private final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private final HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory();
     private URL url;
 
-    public SlackSender(URL url) {
+    public SlackSender(URL url)
+    {
         this.url = url;
     }
 
-    private void send(String s) throws IOException {
+    private void send(String s) throws IOException
+    {
         HashMap<Object, Object> payloadToSend = Maps.newHashMap();
         payloadToSend.put("payload", s);
 
         requestFactory.buildPostRequest(new GenericUrl(url), new UrlEncodedContent(payloadToSend)).execute();
     }
 
-    public void sendToSlack(ICommandSender sender, String text) {
-        try {
+    public void sendToSlack(ICommandSender sender, String text)
+    {
+        try
+        {
             JsonObject json = new JsonObject();
             json.addProperty("text", text);
             json.addProperty("username", sender.getName());
-            if (!(sender instanceof SlackCommandSender)) {
+            if (!(sender instanceof SlackCommandSender))
+            {
                 json.addProperty("icon_url", "https://minotar.net/helm/" + sender.getName() + ".png");
             }
             send(json.toString());
             //LogHelper.info(json.toString());
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }

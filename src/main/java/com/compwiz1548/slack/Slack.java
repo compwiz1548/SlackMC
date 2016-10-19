@@ -7,9 +7,7 @@ import com.compwiz1548.slack.reference.Reference;
 import com.compwiz1548.slack.reference.Settings;
 import com.compwiz1548.slack.util.LogHelper;
 import com.compwiz1548.slack.util.Pair;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -26,7 +24,8 @@ import java.net.URL;
 import java.util.Map;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
-public class Slack {
+public class Slack
+{
     @Instance(Reference.MOD_ID)
     public static Slack instance;
     public boolean senderConnected = false;
@@ -35,50 +34,68 @@ public class Slack {
     private SlackReceiver slackReceiver;
 
     @NetworkCheckHandler
-    public boolean networkCheckHandler(Map<String, String> map, Side side) {
+    public boolean networkCheckHandler(Map<String, String> map, Side side)
+    {
         return true;
     }
 
     @EventHandler
-    private void preInit(FMLPreInitializationEvent event) {
-        if (event.getSide() == Side.SERVER) {
+    private void preInit(FMLPreInitializationEvent event)
+    {
+        if (event.getSide() == Side.SERVER)
+        {
             ConfigurationHandler.init(event.getSuggestedConfigurationFile());
             ServerActivityListener listener = new ServerActivityListener();
-            FMLCommonHandler.instance().bus().register(listener);
             MinecraftForge.EVENT_BUS.register(listener);
-        } else {
-            LogHelper.warn(StatCollector.translateToLocal(Messages.General.CLIENT_SIDE));
+        }
+        else
+        {
+            LogHelper.warn(Messages.General.CLIENT_SIDE);
         }
     }
 
-    public Pair<Boolean, String> slackConnect() {
-        try {
-            if (slackSender != null) {
-                slackSender.sendToSlack(SlackCommandSender.getInstance(), StatCollector.translateToLocal(Messages.General.SERVER_DISCONNECTED));
+    public Pair<Boolean, String> slackConnect()
+    {
+        try
+        {
+            if (slackSender != null)
+            {
+                slackSender.sendToSlack(SlackCommandSender.getInstance(), Messages.General.SERVER_DISCONNECTED);
                 this.slackSender = null;
                 senderConnected = false;
             }
             this.slackSender = new SlackSender(new URL(Settings.webhookURL));
             senderConnected = true;
-            slackSender.sendToSlack(SlackCommandSender.getInstance(), String.format(StatCollector.translateToLocal(Messages.General.SERVER_CONNECTED), Reference.VERSION));
-        } catch (IOException e) {
-            if (Settings.webhookURL.equals("")) {
-                return new Pair<Boolean, String>(false, StatCollector.translateToLocal(Messages.General.NO_URL));
-            } else {
-                return new Pair<Boolean, String>(false, StatCollector.translateToLocal(Messages.General.INCORRECT_WEBHOOK));
+            slackSender.sendToSlack(SlackCommandSender.getInstance(), String.format(Messages.General.SERVER_CONNECTED, Reference.VERSION));
+        }
+        catch (IOException e)
+        {
+            if (Settings.webhookURL.equals(""))
+            {
+                return new Pair<Boolean, String>(false, Messages.General.NO_URL);
+            }
+            else
+            {
+                return new Pair<Boolean, String>(false, Messages.General.INCORRECT_WEBHOOK);
             }
         }
-        try {
-            try {
+        try
+        {
+            try
+            {
                 this.slackReceiver.setEnabled(false);
                 receiverConnected = false;
-            } catch (NullPointerException e) {
+            }
+            catch (NullPointerException e)
+            {
                 //Do nothing (no previous receiver)
             }
             this.slackReceiver = new SlackReceiver();
             this.slackReceiver.setEnabled(true);
             receiverConnected = true;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             return new Pair<Boolean, String>(false, e.getStackTrace().toString());
         }
         return new Pair<Boolean, String>(true, "");
@@ -86,25 +103,30 @@ public class Slack {
 
     @EventHandler
     @SideOnly(Side.SERVER)
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(FMLServerStartingEvent event)
+    {
         event.registerServerCommand(new CommandSlack());
     }
 
     @EventHandler
     @SideOnly(Side.SERVER)
-    public void onServerStarted(FMLServerStartedEvent event) {
+    public void onServerStarted(FMLServerStartedEvent event)
+    {
         slackConnect();
     }
 
     @EventHandler
     @SideOnly(Side.SERVER)
-    public void onServerStopping(FMLServerStoppingEvent event) {
-        if (senderConnected) {
-            slackSender.sendToSlack(SlackCommandSender.getInstance(), StatCollector.translateToLocal(Messages.General.SERVER_STOPPED));
+    public void onServerStopping(FMLServerStoppingEvent event)
+    {
+        if (senderConnected)
+        {
+            slackSender.sendToSlack(SlackCommandSender.getInstance(), Messages.General.SERVER_STOPPED);
         }
     }
 
-    public SlackSender getSlackSender() {
+    public SlackSender getSlackSender()
+    {
         return this.slackSender;
     }
 }

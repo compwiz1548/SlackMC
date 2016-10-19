@@ -21,3 +21,4 @@ out/*
 .idea/modules/SlackMC_test.iml
 .idea/modules/SlackMC_main.iml
 build/*
+.idea/*

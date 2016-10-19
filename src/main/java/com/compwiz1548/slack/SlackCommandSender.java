@@ -5,73 +5,93 @@ import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class SlackCommandSender implements ICommandSender {
+public class SlackCommandSender implements ICommandSender
+{
     private static final ICommandSender INSTANCE = new SlackCommandSender(false);
     private boolean broadcastResult;
 
-    public SlackCommandSender(boolean broadcastResult) {
+    public SlackCommandSender(boolean broadcastResult)
+    {
         this.broadcastResult = broadcastResult;
     }
 
-    public static ICommandSender getInstance() {
+    public static ICommandSender getInstance()
+    {
         return INSTANCE;
     }
 
+    public MinecraftServer getServer()
+    {
+        return FMLCommonHandler.instance().getMinecraftServerInstance();
+    }
+
     @Override
-    public String getName() {
+    public String getName()
+    {
         return Settings.serverName;
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        return new ChatComponentText(this.getName());
+    public ITextComponent getDisplayName()
+    {
+        return new TextComponentString(this.getName());
     }
 
     @Override
-    public void addChatMessage(IChatComponent p_145747_1_) {
-        if (broadcastResult) {
-            Slack.instance.getSlackSender().sendToSlack(this, p_145747_1_.getUnformattedText());
+    public void addChatMessage(ITextComponent component)
+    {
+        if (broadcastResult)
+        {
+            Slack.instance.getSlackSender().sendToSlack(this, component.getUnformattedText());
         }
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_) {
+    public boolean canCommandSenderUseCommand(int permLevel, String commandName)
+    {
         return true;
     }
 
     @Override
-    public BlockPos getPosition() {
+    public BlockPos getPosition()
+    {
         return new BlockPos(0, 0, 0);
     }
 
     @Override
-    public Vec3 getPositionVector() {
-        return new Vec3(0.0D, 0.0D, 0.0D);
+    public Vec3d getPositionVector()
+    {
+        return new Vec3d(0.0D, 0.0D, 0.0D);
     }
 
     @Override
-    public World getEntityWorld() {
-        return MinecraftServer.getServer().worldServers[0];
+    public World getEntityWorld()
+    {
+        return FMLCommonHandler.instance().getMinecraftServerInstance().worldServers[0];
     }
 
     @Override
-    public Entity getCommandSenderEntity() {
+    public Entity getCommandSenderEntity()
+    {
         return null;
     }
 
     @Override
-    public boolean sendCommandFeedback() {
+    public boolean sendCommandFeedback()
+    {
         return false;
     }
 
     @Override
-    public void setCommandStat(CommandResultStats.Type type, int amount) {
+    public void setCommandStat(CommandResultStats.Type type, int amount)
+    {
 
     }
 }
