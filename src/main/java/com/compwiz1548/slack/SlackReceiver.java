@@ -106,7 +106,7 @@ public class SlackReceiver implements HttpHandler
                 String playerList = mcServer.getPlayerList().getFormattedListOfPlayers(false);
                 if (playerList.equals(""))
                 {
-                    Slack.instance.getSlackSender().sendToSlack(SlackCommandSender.getInstance(), I18n.format(Messages.General.NO_ONE_ONLINE));
+                    Slack.instance.getSlackSender().sendToSlack(SlackCommandSender.getInstance(), Messages.General.NO_ONE_ONLINE);
                 }
                 else
                 {

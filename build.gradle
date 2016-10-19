@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 apply plugin: 'maven'
 
-version = "1.10.2-0.8"
+version = "1.10.2-0.8.1"
 group= "com.compwiz1548.slack" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SlackMC"
 
